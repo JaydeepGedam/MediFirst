@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}MediFirst | Thank You{% endblock %}
+{% block content %}
+{% load static %}
+
+<style>
+   #main{
+    margin: 150px 100px 0px 100px;;
+  }
+    @media only screen and (max-width: 600px) {
+  #main{
+    margin: 240px 20px 0 20px;
+  }
+}
+</style>
+
+<main id="main">
+  <div class="jumbotron text-center">
+  <h1 class="display-3">Thank You!</h1>
+  <p class="lead">We will reach out you as soon as possible. Your donation means a lot for us. Keep visiting. Thank You.</p>
+  <hr>
+  <p class="lead">
+    <a class="btn btn-primary btn-sm" href="/" role="button">Continue to homepage</a>
+  </p>
+</div>
+  </main><!-- End #main -->
+
+{% endblock %}

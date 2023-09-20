@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donate Here</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <style>
+        .title1{
+            color: #ff523b;
+        }
+        .btn-submit{
+            display: inline-block;
+            background: #ff523b;
+            color: #fff;
+            padding: 8px 30px;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+            transition: background 0.5s;
+        }
+        .btn-submit:hover{
+            outline: none;
+        }
+        .btn-submit:active{
+            transform: translateY(3px);
+        }
+        input{
+            margin: 10px;
+            width: 275px;
+        }
+
+        .btn-success{
+            position: absolute;
+            right: 0;
+            bottom:0;
+            background-color: yellow;
+            border-radius: 50%;
+            margin: 0px 50px 20px 0px;
+            width: 97px;
+            height: 97px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            position: fixed;
+        }
+        .btn-success:active {
+          transform: translateY(4px);
+        }
+
+    </style>
+</head>
+<body>
+    <br><br>
+    <div class="container1">
+        <button class="btn btn-success" data-target="#mymodal" data-toggle="modal" style="color:#000;">Donate Medicines</button>
+    </div>
+
+    <div class="modal" id="mymodal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h3 class="title1">Donate Here</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <form action="">
+                        <div class="form-group">
+                            <b><label>Donor Information</label></b><br>
+                            &emsp;&emsp;<label>Name :</label>
+                            <input type="text" style="position: relative; top:0px; left:20px;" name="dnr-name">
+                            <br>
+                            &emsp;&emsp;<label>Address :</label>
+                            <input type="text" style="position: relative; top:0px; left:6px;" name="dnr-address">
+                            <br>
+                            &emsp;&emsp;<label>Phone :</label>
+                            <input type="tel" style="position: relative; top:0px; left:17px;" name="dnr-phone" pattern="[0-9]{10}">
+
+                            <br><br><b><label>Medication Information</label></b><br>
+                            &emsp;&emsp;<label>Drug Name :</label>
+                            <input type="text" style="position: relative; top:0px; left:18px;" name="drg-name">
+                            <br>
+                            &emsp;&emsp;<label>Lot Number :</label>
+                            <input type="text" style="position: relative; top:0px; left:15px;" name="drg-lotno">
+                            <br>
+                            &emsp;&emsp;<label>Expiry Date :</label>
+                            <input type="date" style="position: relative; top:0px; left:20px;" name="drg-exdate">
+                            <br>
+                            &emsp;&emsp;<label>Drug Quantity :</label>
+                            <input type="number" style="position: relative; top:0px; left:0px;" name="drg-quantity" min="1">
+                            <br>
+                            &emsp;&emsp;<label>Drug Strength :</label>
+                            <input type="text" style="position: relative; top:0px; left:1px;" name="drg-strength">
+
+                            <br><br><b><label>Certifications </label></b><br>
+                            &emsp;&emsp;<label>Donor Signature:</label>
+                            <input type="file" style="position: relative; top:0px; left:0px;" name="signature" accept="static/image/">
+                            <br>
+                            &emsp;&emsp;<label>Today's Date :</label>
+                            <input type="date" style="position: relative; top:0px; left:20px;" name="today_date">
+                            <br>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer justify-content-center">
+                    <button class="btn-submit" data-dismiss="modal">Submit</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

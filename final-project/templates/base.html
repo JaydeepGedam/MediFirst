@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  {% load static %}
+  <title>{% block title %}
+    {% endblock %}</title>
+
+  <style>
+    {% block style %}
+      {% endblock %}
+  </style>
+
+
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static "img/favicon1.ico" %}" rel="icon">
+  <link href="{% static "img/favicon.ico" %}" rel="favicon">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/venobox/venobox.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+  <!-- ======= Top Bar ======= -->
+  <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
+    <div class="container d-flex">
+      <div class="contact-info mr-auto">
+        <i class="icofont-envelope"></i> <a href="mailto:MediFirst444@gmail.com">MediFirst444@gmail.com</a>
+        <i class="icofont-phone"></i> +91 9545176151
+        <i class="icofont-google-map"></i> MediFirst | Online Pharmacy Store 
+      </div>
+      <div class="social-links">
+        <a href="https://twitter.com/MediFirst2" class="twitter"><i class="icofont-twitter"></i></a>
+        <a href="https://www.facebook.com/medi.first.3/" class="facebook"><i class="icofont-facebook"></i></a>
+        <a href="https://www.instagram.com/medi_first/" class="instagram"><i class="icofont-instagram"></i></a>
+        <a href="https://secure.skype.com/portal/overview" class="skype"><i class="icofont-skype"></i></a>
+        <a href="https://www.linkedin.com/in/medifirst-267147208/" class="linkedin"><i
+            class="icofont-linkedin"></i></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+
+      <h1 class="logo mr-auto"><a href="/">MediFirst</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+{% block navbar %}      
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="/">Home</a></li>
+          <li><a href="/products">Products</a></li>
+          <li><a href="/#appointment" class="scrollto"><span>Get Appointment</span></a>
+          <li><a href="/doctor_login" id="doctorlogin"><span>Doctor Login</span></a></li>
+          {% comment %} <li><a href="/#contact">Contact</a></li> {% endcomment %}
+          <li><a href="/#donate">Donate</a></li>
+          <li><a href="/orders">My Orders</a></li>
+          </li>
+        </ul>
+      </nav><!-- .nav-menu -->
+{% endblock %}
+
+      <div class="top-btns">
+      <a href="/cart" class="cart"><span><i class="fas fa-cart-plus">
+      <span class="badge badge-info" id='lblCartCount'>{{request.session.cart.keys|length}}</span></i></span></a>
+
+      {% if usergroup == 'default' %}
+          <a href="/login" class="login-btn" id="dashboard"><span>User Login</span></a>
+      {% endif %}
+
+      {% if usergroup == 'user' %}
+          <div class="dropdown">
+            <a href="/user_dashboard" class="login-btn" id="dashboard"><span>Dashboard</span></a>
+            {% comment %} <div class="dropdown-content">
+              <a href="/logout">Logout</a>
+            </div> {% endcomment %}
+          </div>
+      {% endif %}
+
+      {% if usergroup == 'admin' %}
+          <div class="dropdown">
+            <a href="/admin_dashboard" class="login-btn" id="dashboard"><span>Dashboard</span></a>
+            {% comment %} <div class="dropdown-content">
+              <a href="/admin_logout">Logout</a>
+            </div> {% endcomment %}
+          </div>
+      {% endif %}
+      
+      {% if usergroup == 'doctor' %}
+          <div class="dropdown">
+            <a href="/doctor_dashboard" class="login-btn" id="dashboard"><span>Dashboard</span></a>
+            {% comment %} <div class="dropdown-content">
+              <a href="/doctor_logout">Logout</a>
+            </div> {% endcomment %}
+          </div>
+      {% endif %}
+
+
+      </div>
+
+    </div>
+  </header><!-- End Header -->
+
+  {% block content %}
+    
+  {% endblock %}
+
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h3>MediFirst</h3>
+            <p>
+              Government Engineering, <br>
+              Amravati, Maharashtra 444604<br>
+              India <br><br>
+              <strong>Phone:</strong> +91 9545176151 <br>
+              <strong>Email:</strong> MediFirst444@gmail.com<br>
+            </p>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="/developers-section">Developers Section</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/disclaimer">Disclaimer</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/terms">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/privacy">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="/services">24 x 7 Delivery</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/#doctors">Contact Doctor Online</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/#appointment">Place Your Appointment</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="products">Wide Range Of Medicines</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Download Our App</h4>
+            <p>Get Our App from Google Play Store and Enjoy our Medication Services.</p>
+            <img src="{% static "img/play-store.png" %}" style="width: 130px; height:40px;">
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container d-md-flex py-4">
+
+      <div class="mr-md-auto text-center text-md-left">
+        <div class="copyright">
+          &copy; Copyright <strong><span>MediFirst</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/ -->
+          Designed by <a href="">MediFirst</a>
+        </div>
+      </div>
+      <div class="social-links text-center text-md-right pt-3 pt-md-0">
+        <a href="https://twitter.com/MediFirst2" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="https://www.facebook.com/medi.first.3/" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="https://www.instagram.com/medi_first/" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="https://secure.skype.com/portal/overview" class="google-plus"><i class="bx bxl-skype"></i></a>
+        <a href="https://www.linkedin.com/in/medifirst-267147208/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+
+  <!-- Vendor JS Files -->
+  <script src="{% static "vendor/jquery/jquery.min.js" %}"></script>
+  <script src="{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+  <script src="{% static "vendor/jquery.easing/jquery.easing.min.js" %}"></script>
+  <script src="{% static "vendor/php-email-form/validate.js" %}"></script>
+  <script src="{% static "vendor/venobox/venobox.min.js" %}"></script>
+  <script src="{% static "vendor/waypoints/jquery.waypoints.min.js" %}"></script>
+  <script src="{% static "vendor/counterup/counterup.min.js" %}"></script>
+  <script src="{% static "vendor/owl.carousel/owl.carousel.min.js" %}"></script>
+  <script src="{% static "vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js" %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static "js/main.js" %}"></script>
+
+
+</body>
+
+</html>

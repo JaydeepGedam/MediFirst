@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% block title %}MediFirst | Login{% endblock %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/login_register.css' %}">
+
+    <div class="container-login">
+      <div class="forms-container">
+        <div class="signin-signup extra">
+          <form method="post" class="sign-in-sign-up" id="login-form">
+          {% csrf_token %}
+          <h2 class="title">Sign in</h2>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" name="username" id="username" placeholder="Username" required/>
+          </div>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" name="password" id="password" placeholder="Password" required/>
+          </div>
+          <a href="{% url 'password_reset' %}">Forgot Password?</a>
+          <div class="msg">
+            {% for message in messages %}
+              <h2> {{message}} </h3>
+            {% endfor %}
+        </div>
+          <input type="submit" value="Login" class="btn solid" />
+        </form>
+        </div>
+      </div>
+
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>New here ?</h3>
+            <p>
+              Be a part of our pharmacies. Get best offers for you and enjoy our services. Thank You!
+            </p>
+            <a href="/register"><button class="btn transparent" id="sign-up-btn">
+              Sign up
+            </button></a>
+          </div>
+          <img src="{% static 'img/log.svg' %}" class="image" alt="" />
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <script type="text/javascript">
+
+      $(document).on('submit','#login-form',function(e){
+          e.preventDefault();
+
+          $.ajax({
+            type: 'POST',
+            url: '/login',
+            data: {
+              name:$('#username').val(),
+              password:$('#password').val(),
+              csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            success:function(){
+              alert("logged");
+            }
+          });
+      }
+
+    </script> -->
+
+{% endblock %}

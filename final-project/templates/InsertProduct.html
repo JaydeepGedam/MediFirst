@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+    {% load static %}
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<!-- Favicons -->
+  <link href="{% static "img/favicon1.png" %}" rel="icon">
+  <link href="{% static "img/favicon.png" %}" rel="favicon">
+    <title>Medifirst | Insert Product</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/admin.css' %} ">
+
+    <style>
+        .wrapper{
+            margin-top: 50px;
+        }
+        input[type="file"]{
+            padding-top: 5px;
+            border: none;
+        }
+        input[type="checkbox"]{
+            width: 20px;
+            position: relative;
+            top: 14px;
+            left: 11px
+        }
+    </style>
+
+
+</head>
+<body>
+	<div class="wrapper">
+		<div class="title">
+			Insert Product
+        </div>
+		<form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <div class="field">
+                <input type="submit" value="Insert Product">
+			</div>
+        </form>
+	</div>
+</body>
+</html>

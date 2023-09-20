@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block title %}MediFirst | Cart{% endblock %}
+{% block content %}
+{% load static %}
+{% load cart %}
+{% load custom_filter %}
+<main id="main">
+
+{% if usergroup == 'default' %}
+    <div class="alert alert-warning" role="alert">
+      <b>Warning! </b>You are not logged in so you are not able to checkout further. Please login from <a href="/cartlogin" class="alert-link">here</a>
+    </div>
+{% else %}
+  <div style="margin-top: 300px;"></div>
+{% endif %}
+
+
+    <div class="container">
+        <div class="border rounded p-4 m-4">
+            <h2 class="">Your Cart</h2>
+            <div class="table-responsive"> 
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th>Sno.</th>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for product in products %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><img style="height: 80px;" class="rounded-circle" src="{{product.frontimg.url}}" alt=""></td>
+                    <td>{{product.prod_name}}</td>
+                    <td>{{product.prod_price|currency}}</td>
+                    <td>{{product|cart_quantity:request.session.cart}}</td>
+                    <td>{{product|price_total:request.session.cart|currency}}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="4"></th>
+                        <th class="" colspan="">Total</th>
+                        <th>{{products|total_cart_price:request.session.cart|currency}}</th>
+                    </tr>
+                </tfoot>
+              </table>
+              </div>
+              <hr>
+              <div class="m-3 p-3">
+                <a href="/cart/" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-info border rounded col-lg-3 float-right">Check Out</a>
+              </div>
+        </div>
+    </div>
+
+
+</main><!-- End #main -->
+
+<!-- Modal -->
+
+{% if usergroup == 'default' %}
+{% else %}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Check Out Form</h5><hr>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="m-2 p-2">
+          <form action="{% url 'checkout' %}" method="POST">
+            {%  csrf_token %}
+            <div class="form-group">
+              <label for="">Address</label>
+              <input type="text" class="form-control" id="" name="address" aria-describedby="helpId" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="">Phone</label>
+              <input type="text" class="form-control" id="" name="phone" aria-describedby="helpId" placeholder="">
+            </div>
+            <input type="submit" class="btn float-right btn-outline-info col-lg-6" value="Check out">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

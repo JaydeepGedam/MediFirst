@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+    {% load static %}
+	<link rel="stylesheet" href="{% static 'css/admin.css' %} ">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<!-- Favicons -->
+  <link href="{% static "img/favicon1.png" %}" rel="icon">
+  <link href="{% static "img/favicon.png" %}" rel="favicon">
+    <title>Admin Register</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+		<div class="title">
+			Admin Register
+        </div>
+		<form method="POST">
+            {% csrf_token %}
+			<div class="field">
+				<input type="text" name="username" required>
+				<label>Username</label>
+			</div>
+			<div class="field">
+				<input type="password" name="password" required>
+				<label>Password</label>
+			</div><br>
+            {% if form.errors %}
+               {% for field in form %}
+                   {% for error in field.errors %}
+                      <div class="alert alert-danger">
+                           {{ error|escape }}
+                      </div>
+                   {% endfor %}
+               {% endfor %}
+            {% endif %}
+			<div class="field">
+				<input type="submit" value="Register">
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>

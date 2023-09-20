@@ -1,0 +1,281 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% block title %}{{product.prod_name}}{% endblock %}
+
+{% load cart %}
+{% load custom_filter %}
+
+
+{% block navbar %}
+<nav class="nav-menu d-none d-lg-block">
+    <ul>
+        <li id="home"><a href="/">Home</a></li>
+        <li id="products" class="active"><a href="/products">Products</a></li>
+        <li><a href="/#appointment" class="scrollto"><span>Get Appointment</span></a>
+        <li id="doctorslogin"><a href="/doctor_login" id="doctorlogin"><span>Doctor Login</span></a></li>
+        <li id="contact"><a href="/#contact">Contact</a></li>
+        <li id="orders"><a href="/orders">My Orders</a></li>
+        </li>
+    </ul>
+</nav><!-- .nav-menu -->
+{% endblock %}
+
+
+<style>
+      /* Product Details */
+
+  .content {
+      /* border: 2px solid red; */
+      margin-top: 130px;
+      display: flex;
+  }
+
+  .left-content {
+      /* border: 2px solid rebeccapurple; */
+      flex-basis: 50%;
+      padding: 0 0 0 100px;
+      cursor: pointer;
+  }
+  
+  .small-img-row {
+      max-width: 100%;
+      display: flex;
+      justify-content: space-between;
+  }
+
+  .small-img-col {
+      padding: 5px 2px;
+  }
+
+  .small-img {
+      border: 1px solid #000;
+  }
+
+  .right-content {
+      /* border: 2px solid darkgreen; */
+      flex-basis: 50%;
+      padding: 50px;
+  }
+
+  .right-content h4 {
+      margin: 20px 0;
+      font-size: 22px;
+      font-weight: bold;
+  }
+
+  .right-content p {
+      margin-bottom: -10px;
+  }
+
+  .right-content .fa {
+      color: #1977cc;
+      margin-left: 10px;
+  }
+
+  .right-content p {
+      max-width: 500px;
+  }
+
+  @media only screen and (max-width: 600px) {
+      .content {
+          /* border: 2px solid red; */
+          margin-top: 80px;
+          display: block;
+      }
+
+      .left-content {
+          /* border: 2px solid rebeccapurple; */
+          flex-basis: 50%;
+          padding: 0;
+      }
+
+      .right-content {
+          padding: 30px 15px;
+      }
+
+      .right-content h1 {
+          font-size: 26px;
+          line-height: 32px;
+      }
+  }
+
+
+</style>
+
+
+<div class="content">
+    <div class="left-content">
+        <img src="{{product.img1.url}}" width="100%" id="ProductImg">
+        <div class="small-img-row">
+            <div class="small-img-col">
+                <img src="{{product.img1.url}}" width="100%" class="small-img">
+            </div>
+            <div class="small-img-col">
+                <img src="{{product.img2.url}}" width="100%" class="small-img">
+            </div>
+            <div class="small-img-col">
+                <img src="{{product.img3.url}}" width="100%" class="small-img">
+            </div>
+            <div class="small-img-col">
+                <img src="{{product.img4.url}}" width="100%" class="small-img">
+            </div>
+        </div>
+    </div>
+    <div class="right-content">
+        <h1>{{product.prod_name}}</h1>
+        <h4>{{product.prod_price|currency}}</h4>
+        <h3>Product Details <i class="fa fa fa-indent"></i></h3><br>
+        <p>{{product.prod_detail}}</p>
+    </div>
+</div> 
+
+<!-- <style>
+    .outer-cont {
+        margin-top: 100px;
+        border: 2px solid red;
+        display: flex;
+    }
+
+    .left-cont {
+        border: 2px solid blue;
+        flex-basis: 50%;
+    }
+
+    #ProductImg {
+        float: right;
+        cursor: pointer;
+        width: 70%;
+        height: 70%;
+    }
+
+    .right-cont {
+        border: 2px solid blue;
+        flex-basis: 50%;
+        padding: 50px;
+    }
+
+    .small-img-row {
+        max-width: 70%;
+        display: flex;
+        justify-content: space-between;
+        float: right;
+        cursor: pointer;
+    }
+
+    .small-img-col {
+        padding: 5px 2px;
+    }
+
+    .small-img {
+        border: 1px solid #000;
+    }
+
+    .right-cont h4 {
+        margin: 20px 0;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .right-cont p {
+        margin-bottom: -10px;
+    }
+
+    .right-cont .fa {
+        color: #1977cc;
+        margin-left: 10px;
+    }
+
+    .right-cont p {
+        max-width: 500px;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .outer-cont {
+            margin-top: 80px;
+            display: block;
+        }
+
+        #ProductImg {
+            float: right;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .small-img-row {
+            max-width: 100%;
+        }
+
+        .left-cont {
+            /* border: 10px solid rebeccapurple; */
+            flex-basis: 50%;
+            padding: 0;
+        }
+
+        .right-cont {
+            padding: 30px 15px;
+            margin-top: 50px;
+        }
+
+        .right-cont h1 {
+            font-size: 26px;
+            line-height: 32px;
+        }
+    }
+</style>
+
+
+
+<div class="outer-cont">
+    <div class="left-cont">
+        <img src="{{product.img1.url}}" id="ProductImg">
+        <div class="small-img-row">
+            <div class="small-img-col">
+                <img src="{{product.img1.url}}" width="100%" class="small-img">
+            </div>
+            <div class="small-img-col">
+                <img src="{{product.img2.url}}" width="100%" class="small-img">
+            </div>
+            <div class="small-img-col">
+                <img src="{{product.img3.url}}" width="100%" class="small-img">
+            </div>
+            <div class="small-img-col">
+                <img src="{{product.img4.url}}" width="100%" class="small-img">
+            </div>
+        </div>
+    </div>
+    <div class="right-cont">
+        <h1>{{product.prod_name}}</h1>
+        <h4>{{product.prod_price|currency}}</h4>
+        <h3>Product Details <i class="fa fa fa-indent"></i></h3><br>
+        <p>{{product.prod_detail}}</p>
+    </div>
+</div> -->
+
+
+
+
+
+<script>
+    var ProductImg = document.getElementById("ProductImg");
+    var SmallImg = document.getElementsByClassName("small-img");
+
+    SmallImg[0].onclick = function () {
+        ProductImg.src = SmallImg[0].src;
+    }
+    SmallImg[1].onclick = function () {
+        ProductImg.src = SmallImg[1].src;
+    }
+    SmallImg[2].onclick = function () {
+        ProductImg.src = SmallImg[2].src;
+    }
+    SmallImg[3].onclick = function () {
+        ProductImg.src = SmallImg[3].src;
+    }
+
+
+
+</script>
+
+{% endblock %}

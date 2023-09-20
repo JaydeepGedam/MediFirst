@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% block title %}MediFirst | Products{% endblock %}
+
+{% load static %}
+
+{% load cart %}
+{% load custom_filter %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/products.css' %}">
+
+{% block navbar %}      
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li id="home"><a href="/">Home</a></li>
+          <li id="products" class="active"><a href="/products">Products</a></li>
+          <li><a href="/#appointment" class="scrollto"><span>Get Appointment</span></a>
+          <li id="doctorslogin"><a href="/doctor_login" id="doctorlogin"><span>Doctor Login</span></a></li>
+          <li id="contact"><a href="/#contact">Contact</a></li>
+          <li id="orders"><a href="/orders">My Orders</a></li>
+          </li>
+        </ul>
+      </nav><!-- .nav-menu -->
+{% endblock %}
+
+<div class="searchbox">
+  <form action="/search" method="get" class="form-inline my-2 my-lg-0" style="margin-top: 200px;">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
+    <button class="btn btn-outline-success my-2 my-sm-0" name="search" type="submit">Search</button>
+  </form>
+</div>
+
+
+<section id="myproduct">
+
+    <div class="products">
+      <div class="container">
+
+        <div class="product-items">
+          
+        {% for product in products %}
+          <!-- single product -->
+          <div class="product" id={{product.id}}>
+            <div class="product-content">
+              <div class="product-img" onclick="location.href='{% url 'product-details' product.id %}';" style="transition: all 1s ease;">
+                <img src="{{product.frontimg.url}}" alt="product image">
+              </div>
+              <div class="product-btns">
+                {% if product|is_in_cart:request.session.cart %}
+                <div class="card-footer p-0 no-gutters form-control h-auto">
+                  <div class="row no-gutters">
+                    <form action="#{{product.id}}" class="col-2" method="post">
+                      {% csrf_token %}
+                      <input hidden type="text" name="product" value="{{product.id}}" style="width:50px;">
+                      <input hidden type="text" name="remove" value="True" style="width:50px;">
+                      <input type="submit" value="-" class="btn btn-block btn-primary ml-0 mt-1 mb-1">
+                    </form>
+                    <div class="text-center col my-auto">{{product|cart_quantity:request.session.cart}} in Cart</div>
+                    <form action="#{{product.id}}" class="col-2" method="post">
+                      {% csrf_token %}
+                      <input hidden type="text" name="product" value="{{product.id}}" style="width:50px;">
+                      <input type="submit" value="+" class="btn btn-block btn-primary ml-0 mt-1 mb-1">
+                    </form>
+                  </div>
+                </div>
+                {% else %}
+                {% comment %} <button type="button" class="btn-buy"> buy now</button> {% endcomment %}
+                <form action="#{{product.id}}" method="POST">
+                  {% csrf_token %}
+                  <input hidden type="text" name="product" value="{{product.id}}" style="width:50px;">
+                  <input type="submit" class="btn-cart" value="add to cart"> 
+                </form>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="product-info" onclick="location.href='{% url 'product-details' product.id %}';" style="transition: all 1s ease;">
+              <div class="product-info-top">
+                <!-- <h2 class="sm-title">HealthCare</h2> -->
+                <!-- <div class="rating">
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="far fa-star"></i></span>
+                </div> -->
+              </div>
+              <a href="#" class="product-name">{{product.prod_name}}</a>
+              <!-- <p class="product-price">$ 150.00</p> -->
+              <p class="product-price">{{product.prod_price|currency}}</p>
+            </div>
+          </div>
+          <!-- end of single product -->
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+
+<script>
+    function myFunction() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName("li");
+
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+
+    // function showUL() {
+    //     var x = document.getElementById('myUL');
+
+    //     if (x.style.display === 'none') {
+    //         x.style.display = 'block';
+    //     } else {
+    //         x.style.display = 'none';
+    //     }
+    // }
+</script>
+
+
+{% endblock %}
